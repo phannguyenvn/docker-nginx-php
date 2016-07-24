@@ -21,7 +21,12 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes php5-cli php
 		       php5-gd php5-mcrypt php5-intl php5-imap php5-tidy
 
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/cli/php.ini
+RUN sed -i 's/memory_limit\ =\ 128M/memory_limit\ =\ 2G/g' /etc/php5/fpm/php.ini
+RUN sed -i 's/\;date\.timezone\ =/date\.timezone\ =\ Asia\/Ho_Chi_Minh/g' /etc/php5/fpm/php.ini
+RUN sed -i 's/upload_max_filesize\ =\ 2M/upload_max_filesize\ =\ 200M/g' /etc/php5/fpm/php.ini
+RUN sed -i 's/post_max_size\ =\ 8M/post_max_size\ =\ 200M/g' /etc/php5/fpm/php.ini
+RUN sed -i 's/max_execution_time\ =\ 30/max_execution_time\ =\ 3600/g' /etc/php5/fpm/php.ini
+RUN sed -i 's/\;error_log\ =\ syslog/error_log\ =\ syslog/g' /etc/php5/fpm/php.ini
 
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y nginx
 
